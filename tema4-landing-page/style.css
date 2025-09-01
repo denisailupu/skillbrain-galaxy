@@ -218,7 +218,6 @@ body {
     }
 }
 
-/* Features Section */
 .features {
   text-align: center;
   padding: 80px 40px;
@@ -233,7 +232,6 @@ body {
   color: #0a0a0a;
 }
 
-/* Grid */
 .features-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
