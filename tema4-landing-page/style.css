@@ -1,0 +1,298 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 20px;
+  color: #0a0a0a;
+}
+
+.logo img {
+  height: 30px;
+  margin-right: 8px;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.btn {
+  padding: 8px 18px;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  border: none;
+  font-weight: 500;
+}
+
+.btn-signin {
+  background: transparent;
+  border: 1px solid #ccc;
+}
+
+.btn-signup {
+  background: #008060;
+  color: #fff;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+.hamburger {
+  font-size: 26px;
+  cursor: pointer;
+  display: none;
+}
+
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: #fff;
+  padding: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.mobile-menu ul {
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+.mobile-menu ul li {
+  margin: 15px 0;
+}
+
+.mobile-menu ul li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 18px;
+}
+
+.mobile-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-toggle:checked ~ .mobile-menu {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .nav-links,
+  .nav-buttons {
+    display: none;
+  }
+
+  .hamburger {
+    display: block; 
+  }
+
+  .navbar {
+    padding: 0 20px;
+  }
+}
+
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 80px;
+    gap: 40px;
+}
+  
+.hero-content {
+    flex: 1;
+}
+  
+.hero-content h1 {
+    font-size: 40px;
+    font-weight: bold;
+    color: #0a0a0a;
+    margin-bottom: 20px;
+}
+  
+.hero-content p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    max-width: 500px;
+}
+  
+.hero-buttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+  
+.btn {
+    padding: 12px 28px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+}
+  
+.btn-primary {
+    background: #008060;
+    color: #fff;
+}
+  
+.btn-link {
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    color: #008060;
+    display: flex;
+    align-items: center;
+}
+  
+.play-icon {
+    margin-right: 8px;
+    font-size: 18px;
+}
+  
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+  
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+}
+  
+@media (max-width: 900px) {
+    .hero {
+      flex-direction: column;
+      text-align: center;
+      padding: 40px 20px;
+    }
+  
+    .hero-content p {
+      margin: 0 auto 30px;
+    }
+  
+    .hero-buttons {
+      justify-content: center;
+    }
+  
+    .hero-image {
+      margin-top: 30px;
+    }
+}
+
+/* Features Section */
+.features {
+  text-align: center;
+  padding: 80px 40px;
+  background: #fff;
+  position: relative;
+}
+
+.features h2 {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 60px;
+  color: #0a0a0a;
+}
+
+/* Grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.feature-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.feature-item h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #0a0a0a;
+}
+
+.feature-item p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+  max-width: 220px;
+}
+
+.features-btn .btn-primary {
+  background: #008060;
+  color: #fff;
+  padding: 12px 30px;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+}
