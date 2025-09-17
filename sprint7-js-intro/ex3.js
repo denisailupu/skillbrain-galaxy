@@ -11,7 +11,7 @@
 
 function getDay (numar) {
     switch (numar) {
-        case "0":
+        case 0:
         day = "Sunday";
         break;
         case 1:
@@ -33,8 +33,9 @@ function getDay (numar) {
         day = "Saturday";
         break;
         default:
-            return"Error";
+            return "Error";
     }
+    return day
 }
 
 console.log (getDay(0))
