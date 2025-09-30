@@ -12,7 +12,7 @@ function tellFortune(numarCopii, numePartener, locatieGeografica, locMunca) {
     
 
 const text1 = tellFortune(3, "Emanuel", "Italia", "Programator");
-console.log(text1) 
+console.log(text1);
 
 const text2 = tellFortune(2,"Denisa", "Madrid", "Bucatar");
 console.log(text2)
