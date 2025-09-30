@@ -33,7 +33,7 @@ function getDay (numar) {
         day = "Saturday";
         break;
         default:
-            return "Error";
+            throw "Error";
     }
     return day
 }
