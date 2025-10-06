@@ -9,9 +9,9 @@
 function eliminaPropietate (obiect, proprietate) {
     const obiectNou = {...obiect};
 
-    delete obiectNou[proprietate]
+    delete obiectNou[proprietate];
 
-    return obiectNou
+    return obiectNou;
 }
 
 const obiectInitial = {
@@ -19,6 +19,6 @@ const obiectInitial = {
     b: 2,
 };
 
-const rezultat = eliminaPropietate(obiectInitial, "a")
+const rezultat = eliminaPropietate(obiectInitial, "a");
 
 console.log(rezultat);
