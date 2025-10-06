@@ -8,3 +8,31 @@
 //Ieșire:
 //“Carte 1 de Autor 1” ”Ai citit deja “Carte 1” de Autor 1” ”Carte 2 de Autor 2” ”Trebuie sa citesti “Carte 2” de Autor 2”
 
+const carti = [
+    {
+        titlu: "Crimă și pedeapsă",
+        autor: "F. M. Dostoievski",
+        esteCitita: true,
+    },
+    {
+        titlu: "Mândrie și prejudecată",
+        autor: "Jane Austen",
+        esteCitita: false,
+    }
+];
+
+function afiseazaCarti(carti) {
+    for (let i = 0; i < carti.length; i++) {
+        const carte = carti[i];
+
+        console.log(`${carte.titlu} de ${carte.autor}`);
+
+        if (carte.esteCitita) {
+            console.log(`Ai citit deja "${carte.titlu}" de ${carte.autor}`);
+        } else {
+            console.log(`Trebuie să citești "${carte.titlu}" de ${carte.autor}`);
+        }
+    }
+}
+
+afiseazaCarti(carti);

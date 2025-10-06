@@ -6,3 +6,19 @@
 //Intrare: obiect = { a: 1, b: 2 }, proprietate = “b”
 //Ieșire: { a: 1 }
 
+function eliminaPropietate (obiect, proprietate) {
+    const obiectNou = {...obiect};
+
+    delete obiectNou[proprietate]
+
+    return obiectNou
+}
+
+const obiectInitial = {
+    a: 1,
+    b: 2,
+};
+
+const rezultat = eliminaPropietate(obiectInitial, "a")
+
+console.log(rezultat);
