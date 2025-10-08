@@ -10,10 +10,10 @@
 //Input: [3.45, -2.68, 356, -75.96, 64, 19.28]
 //Output: 364.09000000000003
 
-let numere = [106,28,-2093,530,111,-340,806,81]
-let suma = 0
+let numere = [106, 28, -2093, 530, 111, -340, 806, 81];
+let suma = 0;
 for (let n of numere) {
-    suma += n
+    suma += n;
 }
 
-console.log(suma)
+console.log(suma);

@@ -10,16 +10,15 @@
 //(adaugă +1). În șirul nostru de intrare avem vocalele: i, e, e ⇒ 3.
 
 function numarVocale(text) {
-    let caractere = text.split(""); 
     let vocale = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"]; 
     let total = 0; 
     for (let i = 0; i < text.length; i++) {
         if (vocale.includes(text[i])) {
-            total ++;
+            total++;
         }
     }
 
-return total;
+    return total;
 }
 console.log("Test 1: 'Ana are mere' → " + numarVocale("Ana are mere"));
 console.log("Test 2: 'PROGRAMARE' → " + numarVocale("PROGRAMARE"));
