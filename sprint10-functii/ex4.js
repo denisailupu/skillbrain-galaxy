@@ -11,3 +11,18 @@
 
 //Hint: Pentru a rezolva problema, vom folosi operatorul spread / rest (...) pentru a defini argumentele funcției:
 //const addNumber = (…argumente) ⇒ {}
+
+const addNumber = (...numbers) => {
+    let sum = 0;
+
+    for (let i = 0; i < numbers.length; i++) {
+        sum += numbers[i];
+    }
+
+    return sum;
+};
+
+console.log("Suma numerelor 1, 2, 3 este " + addNumber(1, 2, 3));
+console.log("Suma numerelor 1, 2, 3, 4, 5 este " + addNumber(1, 2, 3, 4, 5));
+console.log("Suma numerelor 10, 20 este " + addNumber(10, 20));
+console.log("Suma numerelor 7, 8, 9, 10 este " + addNumber(7, 8, 9, 10));
