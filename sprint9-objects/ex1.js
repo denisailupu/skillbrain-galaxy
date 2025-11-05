@@ -6,11 +6,11 @@
 //Intrare: titlu = “Pizza”, portii = 3, ingrediente = [“sunca”, “cas”, “ketchup”]
 //Ieșire: { titlu: “Pizza”, portii: 3, ingrediente: [”sunca”, “cas”, “ketchup”] }
 
-function retetaPaste(titlu, portii, ingrediente) {
+function getRetetaPaste(titlu, portii, ingrediente) {
     return {
         titlu: titlu,
         portii: portii,
-        ingrediente: ingrediente
+        ingrediente: [...ingrediente]
     };
 }
 
