@@ -1,0 +1,87 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Manrope', sans-serif;
+    background-color: hsl(218, 23%, 16%);
+    color: hsl(193, 38%, 86%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .container {
+    width: 90%;
+    max-width: 600px;
+  }
+  
+  .advice-card {
+    background-color: hsl(217, 19%, 24%);
+    border-radius: 10px;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  }
+  
+  .advice-id {
+    color: hsl(150, 100%, 66%);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+  }
+  
+  #advice-text {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+  
+  .divider {
+    width: 100%;
+    height: 1px;
+    background-color: hsl(193, 38%, 86%);
+    opacity: 0.2;
+    margin-bottom: 2rem;
+  }
+  
+  .zar-btn {
+    background-color: hsl(150, 100%, 66%);
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .zar-btn:hover {
+    box-shadow: 0 0 20px hsl(150, 100%, 66%);
+  }
+  
+  @media (max-width: 480px) {
+    .advice-card {
+      padding: 1.5rem;
+    }
+  
+    #advice-text {
+      font-size: 1rem;
+    }
+  
+    .zar-btn {
+      width: 50px;
+      height: 50px;
+      font-size: 1.2rem;
+    }
+  }
+  
