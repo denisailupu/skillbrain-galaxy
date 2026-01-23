@@ -19,12 +19,19 @@ const closeLightbox = document.getElementById('closeLightbox');
 const prevImg = document.getElementById('prevImg');
 const nextImg = document.getElementById('nextImg');
 
-const MAX_FILE_SIZE = 3 * 1024 * 1024;
+const MAX_FILE_SIZE = 15 * 1024 * 1024;
 const MAX_WIDTH = 1600;
 const IMAGE_QUALITY = 0.75;
 
 
 let successMsg = null;
+
+function clearSuccess() {
+  if (successMsg) {
+    successMsg.remove();
+    successMsg = null;
+  }
+}
 
 function updateLightbox() {
   const imgs = document.querySelectorAll('.card img');
@@ -49,16 +56,19 @@ chooseBtn.addEventListener('click', () => {
 });
 
 fileInput.addEventListener('change', async () => {
+  clearSuccess();
+  error.textContent = '';
+
   const file = fileInput.files[0];
   if (!file) return;
 
   if (file.size > MAX_FILE_SIZE) {
-    error.textContent = 'Fotografia este prea mare (max 3MB).';
+    error.textContent = 'Fotografia este prea mare (max 15MB).';
     fileInput.value = '';
+    selectedFile = null;
+    previewBox.classList.add('hidden');
     return;
   }
-
-  error.textContent = '';
 
   const compressed = await compressImage(file);
   selectedFile = compressed;
@@ -69,7 +79,7 @@ fileInput.addEventListener('change', async () => {
 
 sendBtn.addEventListener('click', async () => {
   error.textContent = '';
-  if (successMsg) successMsg.remove();
+  clearSuccess();
 
   if (!selectedFile) {
     error.textContent = 'Nu ai ales nicio fotografie.';
@@ -79,74 +89,50 @@ sendBtn.addEventListener('click', async () => {
   loading.classList.remove('hidden');
 
   try {
-    const filePath = `memories/${Date.now()}_${selectedFile.name}`;
+    const filePath = `memories/${Date.now()}_${selectedFile.name.replace(/\s+/g, '_')}`;
 
     const { error: uploadError } = await supabase
       .storage
       .from('photos')
-      .upload(filePath, selectedFile);
+      .upload(filePath, selectedFile, { upsert: false });
 
     if (uploadError) throw uploadError;
 
-    const { data } = supabase
+    const { data: urlData } = supabase
       .storage
       .from('photos')
       .getPublicUrl(filePath);
 
-    await supabase.from('memories').insert({
-      image_url: data.publicUrl,
-      message: messageInput.value.trim() || null
-    });
+    const publicUrl = urlData?.publicUrl;
+    if (!publicUrl) throw new Error('Nu s-a putut obține URL-ul public.');
+
+    const { error: insertError } = await supabase
+      .from('memories')
+      .insert({
+        image_url: publicUrl,
+        message: messageInput.value.trim() || null
+      });
+
+    if (insertError) throw insertError;
 
     selectedFile = null;
     fileInput.value = '';
     previewBox.classList.add('hidden');
     messageInput.value = '';
-    loading.classList.add('hidden');
 
     successMsg = document.createElement('p');
     successMsg.className = 'success-message';
     successMsg.textContent = 'Amintirea a fost trimisă 🤍';
     document.querySelector('.form-box').appendChild(successMsg);
 
-    loadGallery();
+    await loadGallery();
   } catch (err) {
-    error.textContent = 'Eroare la trimitere.';
-    loading.classList.add('hidden');
     console.error(err);
+    error.textContent = err?.message || 'Eroare la trimitere.';
+  } finally {
+    loading.classList.add('hidden');
   }
 });
-
-async function loadGallery() {
-  gallery.innerHTML = '';
-
-  const { data, error } = await supabase
-    .from('memories')
-    .select('*')
-    .order('created_at', { ascending: false });
-
-  if (error) {
-    console.error(error);
-    return;
-  }
-
-  data.forEach(item => {
-    const card = document.createElement('div');
-    card.className = 'card';
-
-    const img = document.createElement('img');
-    img.src = item.image_url;
-    card.appendChild(img);
-
-    if (item.message) {
-      const p = document.createElement('p');
-      p.textContent = item.message;
-      card.appendChild(p);
-    }
-
-    gallery.appendChild(card);
-  });
-}
 
 gallery.addEventListener('click', (e) => {
   if (e.target.tagName === 'IMG') {
@@ -198,7 +184,45 @@ lightboxImg.addEventListener('touchend', (e) => {
   }
 });
 
-loadGallery();
+async function loadGallery() {
+  let resp = await supabase
+    .from('memories')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (resp.error) {
+    console.error('loadGallery error (created_at):', resp.error);
+    resp = await supabase
+      .from('memories')
+      .select('*')
+      .order('id', { ascending: false });
+  }
+
+  if (resp.error) {
+    console.error('loadGallery error:', resp.error);
+    return;
+  }
+
+  const data = resp.data || [];
+  gallery.innerHTML = '';
+
+  data.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const img = document.createElement('img');
+    img.src = item.image_url;
+    card.appendChild(img);
+
+    if (item.message) {
+      const p = document.createElement('p');
+      p.textContent = item.message;
+      card.appendChild(p);
+    }
+
+    gallery.appendChild(card);
+  });
+}
 
 function compressImage(file) {
   return new Promise((resolve, reject) => {
@@ -226,7 +250,7 @@ function compressImage(file) {
 
       canvas.toBlob(
         blob => {
-          if (!blob) reject();
+          if (!blob) return reject(new Error('Compresia a eșuat.'));
           resolve(new File([blob], file.name, { type: 'image/jpeg' }));
         },
         'image/jpeg',
@@ -234,6 +258,12 @@ function compressImage(file) {
       );
     };
 
+    img.onerror = () => reject(new Error('Fișierul nu este o imagine validă.'));
+    reader.onerror = () => reject(new Error('Nu am putut citi fișierul.'));
     reader.readAsDataURL(file);
   });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadGallery();
+});
