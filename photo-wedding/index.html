@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedding Album</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="container">
+
+    <h1>Încarcă o amintire 🤍</h1>
+
+    <div class="form-box">
+      <input type="file" id="fileInput" accept="image/*" />
+
+      <button id="chooseBtn" class="outline-btn">
+        Alege o fotografie
+      </button>
+
+      <div id="previewBox" class="preview-box hidden">
+        <img id="previewImg" />
+      </div>
+
+      <textarea
+        id="messageInput"
+        placeholder="Scrie un mesaj 💌"
+      ></textarea>
+
+      <p id="error" class="error"></p>
+
+      <button id="sendBtn" class="send-btn">
+        Trimite
+      </button>
+
+      <div id="loading" class="loading hidden"></div>
+    </div>
+
+    <hr class="divider" />
+    <h2 class="gallery-title">Galeria foto</h2>
+
+    <div id="gallery"></div>
+  </div>
+
+  <div id="lightbox" class="lightbox hidden">
+    <span id="closeLightbox">✕</span>
+    <span id="prevImg">‹</span>
+    <img id="lightboxImg" />
+    <span id="nextImg">›</span>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
